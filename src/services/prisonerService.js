@@ -729,7 +729,7 @@ const transferPrisoner = async (prisonerId, targetPrisonId, transferReason, user
 /**
  * Release prisoner
  */
-const releasePrisoner = async (prisonerId, releaseReason, releaseNotes, userPrisonId, userRole, userId) => {
+const releasePrisoner = async (prisonerId, userPrisonId, userRole, userId) => {
   const transaction = await db.sequelize.transaction();
   
   try {
@@ -765,8 +765,6 @@ const releasePrisoner = async (prisonerId, releaseReason, releaseNotes, userPris
       prisonerId: prisoner.prisoner_id,
       fullName: prisoner.full_name,
       releaseDate: prisoner.actual_release_date,
-      releaseReason: releaseReason,
-      releaseNotes: releaseNotes
     };
   } catch (error) {
     await transaction.rollback();

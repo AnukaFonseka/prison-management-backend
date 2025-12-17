@@ -370,11 +370,22 @@ const getPrisonStatistics = async (prisonId) => {
   }
 };
 
+const getPrisonDashboardStats = async () => {
+  const [total, active, inactive] = await Promise.all([
+    db.Prison.count(),
+    db.Prison.count({ where: { is_active: true } }),
+    db.Prison.count({ where: { is_active: false } })
+  ]);
+
+  return { total, active, inactive };
+};
+
 module.exports = {
   getAllPrisons,
   getPrisonById,
   createPrison,
   updatePrison,
   deletePrison,
-  getPrisonStatistics
+  getPrisonStatistics,
+  getPrisonDashboardStats
 };

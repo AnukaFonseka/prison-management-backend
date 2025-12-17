@@ -240,12 +240,12 @@ const transferPrisonerValidation = [
     .withMessage('Invalid target prison ID')
     .toInt(),
   
-  body('transfer_reason')
-    .trim()
-    .notEmpty()
-    .withMessage('Transfer reason is required')
-    .isLength({ min: 10, max: 500 })
-    .withMessage('Transfer reason must be between 10 and 500 characters')
+  // body('transfer_reason')
+  //   .trim()
+  //   .notEmpty()
+  //   .withMessage('Transfer reason is required')
+  //   .isLength({ min: 10, max: 500 })
+  //   .withMessage('Transfer reason must be between 10 and 500 characters')
 ];
 
 /**
@@ -253,9 +253,9 @@ const transferPrisonerValidation = [
  */
 const releasePrisonerValidation = [
   body('release_reason')
+    .optional()
     .trim()
-    .notEmpty()
-    .withMessage('Release reason is required')
+    // .withMessage('Release reason is required')
     .isLength({ min: 10, max: 500 })
     .withMessage('Release reason must be between 10 and 500 characters'),
   

@@ -371,6 +371,44 @@ const getAllRolesDropdown = async () => {
   }
 };
 
+/**
+ * Get user dashboard statistics
+ * - total users
+ * - active users
+ * - inactive users
+ * If prisonId is provided, stats are filtered by prison
+ */
+const getUserDashboardStats = async (prisonId = null) => {
+  try {
+    const whereClause = {};
+
+    if (prisonId) {
+      whereClause.prison_id = prisonId;
+    }
+
+    const [totalUsers, activeUsers, inactiveUsers] = await Promise.all([
+      db.User.count({
+        where: { ...whereClause }
+      }),
+      db.User.count({
+        where: { ...whereClause, is_active: true }
+      }),
+      db.User.count({
+        where: { ...whereClause, is_active: false }
+      })
+    ]);
+
+    return {
+      totalUsers,
+      activeUsers,
+      inactiveUsers
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -378,5 +416,6 @@ module.exports = {
   updateUser,
   deleteUser,
   resetUserPassword,
-  getAllRolesDropdown
+  getAllRolesDropdown,
+  getUserDashboardStats
 };

@@ -462,12 +462,10 @@ const transferPrisoner = async (req, res) => {
 const releasePrisoner = async (req, res) => {
   try {
     const { id } = req.params;
-    const { release_reason, release_notes } = req.body;
+    // const { release_reason, release_notes } = req.body;
     
     const result = await prisonerService.releasePrisoner(
       id,
-      release_reason,
-      release_notes,
       req.user.prisonId,
       req.user.roleName,
       req.user.userId
