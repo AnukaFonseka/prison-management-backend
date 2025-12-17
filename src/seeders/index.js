@@ -100,6 +100,7 @@ const seedRolePermissions = async () => {
   // Visitor Manager - Visitor management
   const visitorManagerPerms = allPermissions.filter(p =>
     p.permission_name.includes('visitor') ||
+    p.permission_name.includes('visit') ||
     p.permission_name === PERMISSIONS.VIEW_PRISONERS ||
     p.permission_name === PERMISSIONS.VIEW_REPORTS
   );

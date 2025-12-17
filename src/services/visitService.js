@@ -368,7 +368,7 @@ const getVisitById = async (visitId, userPrisonId, userRole) => {
     }
 
     // Check access
-    if (!checkPrisonAccess(userPrisonId, visit.prisoner.prison_id, userRole)) {
+    if (!checkPrisonAccess(userPrisonId, visit.prisoner.prison.prison_id, userRole)) {
       throw new Error('You do not have access to this visit');
     }
 
@@ -830,8 +830,8 @@ const getVisitStatistics = async (prisonId = null, startDate = null, endDate = n
       }, { scheduled: 0, completed: 0, cancelled: 0 }),
       mostVisitedPrisoners: mostVisited.map(v => ({
         prisonerId: v.prisoner_id,
-        fullName: v.prisoner.full_name,
-        nic: v.prisoner.nic,
+        fullName: v.prisoner?.full_name,
+        nic: v.prisoner?.nic,
         visitCount: parseInt(v.dataValues.visitCount)
       }))
     };

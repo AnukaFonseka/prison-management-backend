@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     photo_type: {
-      type: DataTypes.ENUM('Profile', 'Full Body', 'Other'),
+      type: DataTypes.ENUM('Profile', 'Full Body', 'Front', 'Side', 'Identification' ),
       allowNull: false,
       defaultValue: 'Profile'
     },
